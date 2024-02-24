@@ -1,5 +1,5 @@
 {% set name = "helm-docs" %}
-{% set version = "1.12.0" %}
+{% set version = "1.13.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,13 +7,13 @@ package:
 
 source:
   - url: https://github.com/norwoodj/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-    sha256: 218ac8b089ab3966853bdbecd43e165ede3932865f0fb2f15c4197eb969c6540
+    sha256: 628f1f9dac58eebba1f960863cdbf8045c9ec8fa740e32c7c15ac5edbf9963eb
     folder: src
 
 build:
   number: 0
   script:
-    - cd src 
+    - cd src
     - go install -v -ldflags "-X main.version={{ version }}" ./cmd/helm-docs
     - go-licenses save ./cmd/helm-docs --save_path ../library_licenses
 
