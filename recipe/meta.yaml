@@ -1,5 +1,5 @@
 {% set name = "helm-docs" %}
-{% set version = "1.13.1" %}
+{% set version = "1.14.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   - url: https://github.com/norwoodj/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-    sha256: b1a0eba4120614f3ddc4d5cbe1133dcfc44ef746543c49a3e07168d2db55827d
+    sha256: 88d1b3401220b2032cd27974264d2dc0da8f9e7b67a8a929a0848505c4e4a0ae
     folder: src
 
 build:
