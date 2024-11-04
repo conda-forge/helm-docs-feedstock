@@ -11,7 +11,7 @@ source:
     folder: src
 
 build:
-  number: 0
+  number: 1
   script:
     - cd src
     - go install -v -ldflags "-X main.version={{ version }}" ./cmd/helm-docs
@@ -38,3 +38,4 @@ about:
 extra:
   recipe-maintainers:
     - "0xbe7a"
+    - dbast
