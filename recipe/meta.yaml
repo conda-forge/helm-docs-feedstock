@@ -14,8 +14,8 @@ build:
   number: 1
   script:
     - cd src
-    - go install -v -ldflags "-w -s -X main.version={{ version }}" ./cmd/helm-docs                         # [build_platform == target_platform]
-    - go build -v -ldflags "-w -s -X main.version={{ version }}" ./cmd/helm-docs -o $PREFIX/bin/helm-docs  # [build_platform != target_platform]
+    - go install -v -ldflags "-w -s -X main.version={{ version }}" ./cmd/helm-docs         # [build_platform == target_platform]
+    - go build -v -ldflags "-w -s -X main.version={{ version }}" -o $PREFIX/bin/helm-docs  # [build_platform != target_platform]
     - go-licenses save ./cmd/helm-docs --save_path ../library_licenses
 
 requirements:
