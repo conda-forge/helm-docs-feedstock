@@ -1,0 +1,51 @@
+schema_version: 1
+
+context:
+  name: helm-docs
+  version: 1.14.2
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/norwoodj/${{ name }}/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: 88d1b3401220b2032cd27974264d2dc0da8f9e7b67a8a929a0848505c4e4a0ae
+  target_directory: src
+
+build:
+  number: 1
+  script:
+    - cd src
+    - if: unix
+      then: go build -v -ldflags "-w -s -X main.version=${{ version }}" -o "$PREFIX/bin/helm-docs" ./cmd/helm-docs
+    - if: win
+      then: go build -v -ldflags "-w -s -X main.version=${{ version }}" -o "%LIBRARY_BIN%\helm-docs.exe" ./cmd/helm-docs
+    - go-licenses save ./cmd/helm-docs --save_path ../library_licenses
+
+requirements:
+  build:
+    - ${{ compiler('go-nocgo') }}
+    - go-licenses
+
+tests:
+  - package_contents:
+      bin:
+        - helm-docs
+  - script:
+      - helm-docs --version
+      - helm-docs --help
+
+about:
+  homepage: https://github.com/norwoodj/helm-docs
+  repository: https://github.com/norwoodj/helm-docs
+  license: GPL-3.0-only
+  license_file:
+    - src/LICENSE
+    - library_licenses/
+  summary: A tool for automatically generating markdown documentation for helm charts
+
+extra:
+  recipe-maintainers:
+    - "0xbe7a"
+    - dbast
